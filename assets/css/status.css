@@ -1,0 +1,121 @@
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.55);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+}
+.modal-overlay.open {
+    display: flex;
+}
+.modal-box {
+    background: #fff;
+    border-radius: 14px;
+    max-width: 640px;
+    width: 100%;
+    padding: 20px 22px 18px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.35);
+}
+.modal-header-row {
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:10px;
+}
+.modal-title {
+    font-size: 16px;
+    font-weight: 600;
+}
+.modal-close-btn {
+    border:none;
+    background:transparent;
+    font-size:20px;
+    cursor:pointer;
+}
+.modal-form-group {
+    margin-bottom:10px;
+    font-size:12px;
+}
+.modal-form-group label {
+    display:block;
+    margin-bottom:4px;
+}
+.modal-form-group input,
+.modal-form-group textarea,
+.modal-form-group select {
+    width:100%;
+    padding:7px 8px;
+    border-radius:6px;
+    border:1px solid #ccc;
+    font-size:13px;
+}
+.modal-footer-row {
+    display:flex;
+    justify-content:flex-end;
+    gap:8px;
+    margin-top:10px;
+}
+
+/* badge status kartu */
+.badge-status-free {
+    background:#e8f5e9;
+    color:#2e7d32;
+}
+.badge-status-busy {
+    background:#ffebee;
+    color:#c62828;
+}
+.badge-status-upcoming {
+    background:#fff8e1;
+    color:#f9a825;
+}
+.badge-status-free,
+.badge-status-busy,
+.badge-status-upcoming {
+    font-size:10px;
+    padding:3px 8px;
+    border-radius:999px;
+    font-weight:600;
+}
+.room-card.upcoming {
+    background:#fff9e6;
+}
+.room-card.busy {
+    background:#ffeaea;
+}
+.info-text {
+    font-size:11px;
+    color:#666;
+    margin-top:4px;
+}
+.alert {
+    background:#e3f2fd;
+    border-radius:8px;
+    padding:10px 12px;
+    font-size:12px;
+    margin-bottom:10px;
+}
+.alert-error {
+    background:#ffebee;
+    color:#b71c1c;
+}
+
+.filter-item-top{
+    margin-top: 16px;
+}
+
+.filter-check-label {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 11px;
+}
+
+-room-grid-empty {
+    grid-column: 1/-1;
+    font-size: 12px;
+    color: #777;
+    padding: 10px 0;
+}
