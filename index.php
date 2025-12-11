@@ -1,4 +1,5 @@
 <?php
+require 'config.php';
 require 'layout.php';
 $_GET['page'] = 'home';
 render_header("Sistem Booking Kelas - Beranda");

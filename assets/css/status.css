@@ -119,3 +119,34 @@
     color: #777;
     padding: 10px 0;
 }
+/* jadwal.php */
+
+.jadwal-filter-row {
+    margin-bottom: 18px;
+}
+
+.jadwal-filter-form {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+
+.jadwal-table {
+    width: 100%;
+    font-size: 12px;
+    border-collapse: collapse;
+}
+
+.jadwal-table thead tr {
+    background: #f5f5f5;
+}
+
+.jadwal-table td {
+    padding: 6px 8px;
+}
+
+.jadwa-status-cell{
+    color: #2e7d32;
+    font-weight: 600;
+}

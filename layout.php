@@ -11,9 +11,9 @@ function render_header($title = "UniSpace - Campus Booking System") {
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <title><?= htmlspecialchars($title) ?></title>
+    <title><?= e($title) ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="assets/css/layout">
+    <link rel="stylesheet" href="assets/css/layout.css">
     <?php
     if (in_array($currentPage, ['status', 'jadwal'], true)):?>
     <link rel="stylesheet" href="assets/css/status.css">
@@ -30,14 +30,14 @@ function render_header($title = "UniSpace - Campus Booking System") {
         </div>
     </div>
     <div class="navbar-center">
-        <a href="index.php" class="<?= ($_GET['page'] ?? 'home') === 'home' ? 'active' : '' ?>">Beranda</a>
-        <a href="status.php?page=status" class="<?= ($_GET['page'] ?? '') === 'status' ? 'active' : '' ?>">Status Ruang</a>
-        <a href="jadwal.php?page=jadwal" class="<?= ($_GET['page'] ?? '') === 'jadwal' ? 'active' : '' ?>">Jadwal</a>
+        <a href="index.php" class="<?= $currentPage === 'home' ? 'active' : '' ?>">Beranda</a>
+        <a href="status.php?page=status" class="<?= $currentPage === 'status' ? 'active' : '' ?>">Status Ruang</a>
+        <a href="jadwal.php?page=jadwal" class="<?= $currentPage === 'jadwal' ? 'active' : '' ?>">Jadwal</a>
     </div>
     <div class="navbar-right">
         <?php if (!empty($_SESSION['user'])): ?>
-            <span style="font-size:12px; margin-right:8px;">
-                Halo, <?= htmlspecialchars($_SESSION['user']['username']) ?>
+            <span class="navbar-user">
+                Halo, <?= e($_SESSION['user']['username']) ?>
             </span>
             <a href="logout.php">LOGOUT</a>
         <?php else: ?>

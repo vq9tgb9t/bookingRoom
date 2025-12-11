@@ -79,44 +79,44 @@ render_header("Daftar Jadwal Kuliah");
             Belum ada booking yang <?= $mode_view === 'history' ? 'masuk riwayat.' : 'aktif atau akan datang.' ?>
         </div>
     <?php else: ?>
-        <table class="table" style="width:100%; font-size:12px; border-collapse:collapse;">
+        <table class="jadwal-table">
             <thead>
-                <tr style="background:#f5f5f5;">
-                    <th style="padding:8px; text-align:left;">No</th>
-                    <th style="padding:8px; text-align:left;">Tanggal</th>
-                    <th style="padding:8px; text-align:left;">Jam</th>
-                    <th style="padding:8px; text-align:left;">Ruang</th>
-                    <th style="padding:8px; text-align:left;">Peminjam</th>
-                    <th style="padding:8px; text-align:left;">Keterangan</th>
-                    <th style="padding:8px; text-align:left;">Status</th>
+                <tr>
+                    <th>No</th>
+                    <th>Tanggal</th>
+                    <th>Jam</th>
+                    <th>Ruang</th>
+                    <th>Peminjam</th>
+                    <th>Keterangan</th>
+                    <th>Status</th>
                 </tr>
             </thead>
             <tbody>
                 <?php $no=1; foreach ($rows as $row): ?>
                     <tr>
-                        <td style="padding:6px 8px;"><?= $no++ ?></td>
-                        <td style="padding:6px 8px;"><?= htmlspecialchars($row['tanggal']) ?></td>
-                        <td style="padding:6px 8px;">
+                        <td><?= $no++ ?></td>
+                        <td><?= e($row['tanggal']) ?></td>
+                        <td>
                             <?= substr($row['jam_mulai'],0,5) ?> - <?= substr($row['jam_selesai'],0,5) ?>
                         </td>
-                        <td style="padding:6px 8px;">
-                            <?= htmlspecialchars($row['kode_ruang']) ?>
-                            (Gedung <?= htmlspecialchars($row['gedung']) ?> Lt.<?= (int)$row['lantai'] ?>)
+                        <td>
+                            <?= e($row['kode_ruang']) ?>
+                            (Gedung <?= e($row['gedung']) ?> Lt.<?= (int)$row['lantai'] ?>)
                         </td>
-                        <td style="padding:6px 8px;">
-                            <?= htmlspecialchars($row['nama_peminjam'] ?: $row['peminjam'] ?: '-') ?>
+                        <td>
+                            <?= e($row['nama_peminjam'] ?: $row['peminjam'] ?: '-') ?>
                         </td>
-                        <td style="padding:6px 8px;">
+                        <td>
                             <?php
                               $ketParts = [];
                               if (!empty($row['nama_kelas']))   $ketParts[] = 'Kelas: '.$row['nama_kelas'];
                               if (!empty($row['keperluan']))    $ketParts[] = 'Keperluan: '.$row['keperluan'];
                               if (!empty($row['deskripsi']))    $ketParts[] = $row['deskripsi'];
-                              echo htmlspecialchars(implode('; ', $ketParts) ?: '-');
+                              echo e(implode('; ', $ketParts) ?: '-');
                             ?>
                         </td>
-                        <td style="padding:6px 8px; color:#2e7d32; font-weight:600;">
-                            <?= strtoupper($row['status']) ?>
+                        <td class="jadwal-status-cell">
+                            <?= e(strtoupper($row['status'])) ?>
                         </td>
                     </tr>
                 <?php endforeach; ?>

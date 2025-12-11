@@ -1,11 +1,21 @@
 <?php
-require 'layout.php';
 require 'config.php';
+require 'layout.php';
+
+if (!empty($_SESSION['user'])) {
+    header('location: index.php');
+    exit;
+}
 
 $_GET['page'] = 'login';
 
 $loginError = '';
 $redirect = $_GET['redirect'] ?? $_POST['redirect'] ?? 'index.php';
+
+$allowedRedirects = ['index.php','status.php','jadwal.php'];
+if (!in_array($redirect, $allowedRedirects, true)) {
+    $redirect = 'index.php';
+}
 
 // proses submit
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -20,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         header('Location: ' . $redirect);
         exit;
     } else {
-        $loginError = 'Username atau password salah.';
+        $loginError = 'Username atau Password salah';
     }
 }
 
@@ -35,13 +45,13 @@ render_header("Login - Booking Ruangan");
     <div class="login-subtitle">Silakan login untuk membooking ruangan</div>
 
     <?php if ($loginError): ?>
-        <div style="color:#c62828; font-size:12px; margin-bottom:10px;">
-            <?= htmlspecialchars($loginError) ?>
+        <div class="login-error">
+            <?= e($loginError) ?>
         </div>
     <?php endif; ?>
 
     <form method="post" action="login.php?page=login">
-        <input type="hidden" name="redirect" value="<?= htmlspecialchars($redirect) ?>">
+        <input type="hidden" name="redirect" value="<?= e($redirect) ?>">
 
         <div class="form-group">
             <label>Username</label>
