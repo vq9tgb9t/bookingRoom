@@ -32,9 +32,15 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: 700;
-            color: #004d40;
+            overflow: hidden;
         }
+        .navbar-logo-img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+        }
+
         .navbar-title-main {
             font-weight: 700;
             font-size: 14px;
@@ -357,13 +363,9 @@
             height: 64px;
             margin: 0 auto 10px;
             border-radius: 50%;
-            background-color: #ffc400;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: 700;
-            color: #004d40;
-            font-size: 20px;
         }
         .login-title {
             font-size: 18px;

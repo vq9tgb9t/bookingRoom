@@ -8,7 +8,18 @@ $_GET['page'] = 'status';
 $errors = [];
 $info_message = null;
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'save_booking') {
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && 
+    ($_POST['action'] ?? '') === 'save_booking' && 
+    empty($_SESSION['user'])) {
+    // butuh login
+    header('Location: login.php?page=login&redirect=status.php');
+    exit;
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && 
+    ($_POST['action'] ?? '') === 'save_booking'
+) {
+
     $room_id = (int) ($_POST['room_id'] ?? 0);
     $nama_kelas = trim($_POST['nama_kelas'] ?? '');
     $nama_peminjam = trim($_POST['nama_peminjam'] ?? '');
@@ -223,7 +234,7 @@ render_header("Status Ruang Kelas");
             <span>Jam Cek Status</span>
             <input type="time" name="jam" value="<?= e($jam_param) ?>">
         </div>
-        <div class="filter-item filter-item--top">
+        <div class="filter-item filter-item-top">
             <label class="filter-checkbox-label">
                 <input type="checkbox" name="apply_dt" value="1" <?= $apply_dt ? 'checked' : '' ?>>
                 Gunakan tanggal & jam di atas
@@ -258,33 +269,17 @@ render_header("Status Ruang Kelas");
 
 <!-- TAB GEDUNG -->
 <div class="tab-row">
-    <a href="?page=status&gedung=D
-    &lantai=<?= (int) $lantai ?>
-    &tanggal=<?= e($tanggal_param) ?>
-    &jam=<?= e($jam_param) ?>
-    &mode=<?= e($mode) ?>
-    &view_mode=<?= e($view_mode) ?><?= $apply_dt ? '&apply_dt=1' : '' ?>"
+    <a href="?page=status&gedung=D&lantai=<?= (int) $lantai ?>&tanggal=<?= e($tanggal_param) ?>&jam=<?= e($jam_param) ?>&mode=<?= e($mode) ?>&view_mode=<?= e($view_mode) ?><?= $apply_dt ? '&apply_dt=1' : '' ?>"
         class="tab <?= $gedung === 'D' ? 'active' : '' ?>">GEDUNG D</a>
-    <a href="?page=status&gedung=S
-    &lantai=<?= (int) $lantai ?>
-    &tanggal=<?= e($tanggal_param) ?>
-    &jam=<?= e($jam_param) ?>
-    &mode=<?= e($mode) ?>
-    &view_mode=<?= e($view_mode) ?><?= $apply_dt ? '&apply_dt=1' : '' ?>"
+    <a href="?page=status&gedung=S&lantai=<?= (int) $lantai ?>&tanggal=<?= e($tanggal_param) ?>&jam=<?= e($jam_param) ?>&mode=<?= e($mode) ?>&view_mode=<?= e($view_mode) ?><?= $apply_dt ? '&apply_dt=1' : '' ?>"
         class="tab <?= $gedung === 'S' ? 'active' : '' ?>">GEDUNG S</a>
 </div>
 
 <!-- TAB LANTAI -->
 <div class="floor-tabs">
     <?php for ($i = 1; $i <= 4; $i++): ?>
-        <a href="?page=status
-        &gedung=<?= e($gedung) ?>
-        &lantai=<?= (int)$i ?>
-        &tanggal=<?= e($tanggal_param) ?>
-        &jam=<?= e($jam_param) ?>
-        &mode=<?= e($mode) ?>
-        &view_mode=<?= e($view_mode) ?><?= $apply_dt ? '&apply_dt=1' : '' ?>"
-            class="floor-tab <?= $lantai === $i ? 'active' : '' ?>">
+        <a href="?page=status&gedung=<?= e($gedung) ?>&lantai=<?= (int)$i ?>&tanggal=<?= e($tanggal_param) ?>&jam=<?= e($jam_param) ?>&mode=<?= e($mode) ?>&view_mode=<?= e($view_mode) ?><?= $apply_dt ? '&apply_dt=1' : '' ?>"
+        class="floor-tab <?= $lantai === $i ? 'active' : '' ?>">
             LANTAI <?= $i ?>
         </a>
     <?php endfor; ?>
@@ -396,8 +391,12 @@ render_header("Status Ruang Kelas");
                 <?php if ($infoLine): ?>
                     <div class="info-text"><?= e($infoLine) ?></div>
                 <?php endif; ?>
+                <?php if (!empty($_SESSION['user'])): ?>
                 <button class="btn-primary btn-book" data-room-id="<?= $rid ?>"
                     data-room-name="<?= e($room['kode_ruang']) ?>">Booking Ruangan</button>
+                <?php else: ?>
+                    <a href="login.php?page=login&redirect=status.php" class="btn-outline btn-login-booking">Login untuk booking</a>
+                <?php endif; ?>
             </div>
             <?php
         endforeach;

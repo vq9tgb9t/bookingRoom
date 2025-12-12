@@ -15,6 +15,7 @@ $redirect = $_GET['redirect'] ?? $_POST['redirect'] ?? 'index.php';
 $allowedRedirects = ['index.php','status.php','jadwal.php'];
 if (!in_array($redirect, $allowedRedirects, true)) {
     $redirect = 'index.php';
+    
 }
 
 // proses submit
@@ -40,7 +41,9 @@ render_header("Login - Booking Ruangan");
 <a href="index.php" class="breadcrumb-back">← Kembali</a>
 
 <div class="login-card">
-    <div class="login-logo">UIN</div>
+    <div class="login-logo">
+        <img src="assets/img/logoUwin.png" alt="Logo UIN Saizu" class="navbar-logo-img">
+    </div>
     <div class="login-title">Selamat Datang</div>
     <div class="login-subtitle">Silakan login untuk membooking ruangan</div>
 

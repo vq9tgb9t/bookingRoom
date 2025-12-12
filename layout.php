@@ -23,7 +23,9 @@ function render_header($title = "UniSpace - Campus Booking System") {
 
 <div class="navbar">
     <div class="navbar-left">
-        <div class="navbar-logo">UIN</div>
+        <div class="navbar-logo">
+        <img src="assets/img/logoUwin.png" alt="Logo UIN Saizu" class="navbar-logo-img">
+        </div>
         <div>
             <div class="navbar-title-main">UIN SAIZU</div>
             <div class="navbar-title-sub">KAMPUS 2</div>
