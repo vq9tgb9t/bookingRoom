@@ -4,63 +4,78 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-function render_header($title = "UniSpace - Campus Booking System") {
+function render_header($title = "UniSpace - Campus Booking System")
+{
     $currentPage = $_GET["page"] ?? 'home';
-?>
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <title><?= e($title) ?></title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="assets/css/layout.css">
-    <?php
-    if (in_array($currentPage, ['status', 'jadwal'], true)):?>
-    <link rel="stylesheet" href="assets/css/status.css">
-    <?php endif; ?>
-</head>
-<body>
+    ?>
+    <!DOCTYPE html>
+    <html lang="id">
 
-<div class="navbar">
-    <div class="navbar-left">
-        <div class="navbar-logo">
-        <img src="assets/img/logoUwin.png" alt="Logo UIN Saizu" class="navbar-logo-img">
-        </div>
-        <div>
-            <div class="navbar-title-main">UIN SAIZU</div>
-            <div class="navbar-title-sub">KAMPUS 2</div>
-        </div>
-    </div>
-    <div class="navbar-center">
-        <a href="index.php" class="<?= $currentPage === 'home' ? 'active' : '' ?>">Beranda</a>
-        <a href="status.php?page=status" class="<?= $currentPage === 'status' ? 'active' : '' ?>">Status Ruang</a>
-        <a href="jadwal.php?page=jadwal" class="<?= $currentPage === 'jadwal' ? 'active' : '' ?>">Jadwal</a>
-    </div>
-    <div class="navbar-right">
-        <?php if (!empty($_SESSION['user'])): ?>
-            <span class="navbar-user">
-                Halo, <?= e($_SESSION['user']['username']) ?>
-            </span>
-            <a href="logout.php">LOGOUT</a>
-        <?php else: ?>
-            <a href="login.php?page=login">LOGIN</a>
+    <head>
+        <meta charset="UTF-8">
+        <title><?= e($title) ?></title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="assets/css/layout.css">
+        <?php
+        if (in_array($currentPage, ['status', 'jadwal'], true)): ?>
+            <link rel="stylesheet" href="assets/css/status.css">
         <?php endif; ?>
-    </div>
-</div>
+    </head>
 
-<div class="page-container">
-<?php
+    <body>
+
+        <div class="navbar">
+            <div class="navbar-left">
+                <div class="navbar-logo">
+                    <img src="assets/img/logoUwin.png" alt="Logo UIN Saizu" class="navbar-logo-img">
+                </div>
+                <div>
+                    <div class="navbar-title-main">UIN SAIZU</div>
+                    <div class="navbar-title-sub">KAMPUS 2</div>
+                </div>
+            </div>
+            <div class="navbar-center">
+                <a href="index.php" class="<?= $currentPage === 'home' ? 'active' : '' ?>">Beranda</a>
+                <?php $userLevel = $_SESSION['user']['level'] ?? ''; ?>
+                <?php if ($userLevel !== 'admin'): ?>
+                    <a href="status.php?page=status" class="<?= $currentPage === 'status' ? 'active' : '' ?>">Status Ruang</a>
+                <?php endif; ?>
+
+                <a href="jadwal.php?page=jadwal" class="<?= $currentPage === 'jadwal' ? 'active' : '' ?>">Jadwal</a>
+                <?php if (!empty($_SESSION['user']) && is_array($_SESSION['user']) && (($_SESSION['user']['level'] ?? '') === 'admin')): ?>
+                    <a href="admin_dashboard.php?tab=kelas" class="<?= $currentPage === 'admin_dashboard' ? 'active' : '' ?>">
+                        Admin
+                    </a>
+                <?php endif; ?>
+
+            </div>
+            <div class="navbar-right">
+                <?php if (!empty($_SESSION['user'])): ?>
+                    <span class="navbar-user">
+                        Halo, <?= e($_SESSION['user']['username']) ?>
+                    </span>
+                    <a href="logout.php">LOGOUT</a>
+                <?php else: ?>
+                    <a href="login.php?page=login">LOGIN</a>
+                <?php endif; ?>
+            </div>
+        </div>
+
+        <div class="page-container">
+            <?php
 }
 
-function render_footer() {
-?>
-</div>
+function render_footer()
+{
+    ?>
+        </div>
 
-<div class="footer">
-    © 2025 UIN SAIZU Booking. Sistem Informasi Kampus.
-</div>
+        <div class="footer">
+            © 2025 UIN SAIZU Booking. Sistem Informasi Kampus.
+        </div>
 
-</body>
-</html>
-<?php
+    </body>
+
+    </html>
+    <?php
 }

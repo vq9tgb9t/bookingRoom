@@ -83,8 +83,36 @@
     background:#fff9e6;
 }
 .room-card.busy {
-    background:#ffeaea;
+    background:#000000;
+    color: #ffffff;
+    border: 1px solid #333;
 }
+
+.room-card.busy .room-name {
+    color: #ffffff;
+}
+
+.room-card.busy .room-desc,
+.room-card.busy .info-text {
+    color: #f0f0f0;
+}
+
+.room-card.busy .tag {
+    background: #333333;
+    color: #ffffff;
+}
+
+.room-card.busy .badge-status-busy {
+    background: #ffeb3b;
+    color: #000000;
+}
+
+.room-card.busy .btn-primary {
+    background: #ffffff;
+    color: #000000;
+    border: none;
+}
+
 .info-text {
     font-size:11px;
     color:#666;
@@ -157,4 +185,125 @@
     display: inline-block;
     text-align: center;
     font-size: 11px;
+}
+.btn-book[disabled]{
+  opacity: .55;
+  cursor: not-allowed;
+}
+.room-card.busy .btn-book,
+.room-card.upcoming .btn-book{
+  pointer-events: none;
+  opacity: .55;
+  cursor: not-allowed;
+}
+.slot-preview{
+  background: #f6f7fb;
+  border: 1px solid #e3e6ef;
+  padding: 10px 12px;
+  border-radius: 12px;
+  margin: 10px 0 14px;
+  font-size: 14px;
+  color: #333;
+}
+
+/* Container utama agar status dan tombol sejajar horizontal */
+.status-action-container {
+    display: flex;
+    align-items: center;
+    gap: 12px; 
+    white-space: nowrap; 
+}
+
+/* Style untuk teks status */
+.status-badge-inline {
+    font-weight: bold;
+    color: #166534; 
+    background: #dcfce7; 
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 0.85rem;
+}
+
+
+.btn-cancel-small {
+    background-color: #ef4444;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn-cancel-small:hover {
+    background-color: #b91c1c;
+}
+
+.btn-cancel-small.disabled {
+    background-color: #f3f4f6;
+    color: #9ca3af;
+    cursor: not-allowed;
+    border: 1px solid #e5e7eb;
+}
+
+/* Grouping tombol disabled dan teks menit agar tetap satu baris */
+.disabled-group {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.hint-inline {
+    font-size: 0.7rem;
+    color: #94a3b8;
+    font-style: italic;
+}
+
+.cancel-form-inline {
+    margin: 0;
+    display: flex;
+    align-items: center;
+}
+
+
+
+/* Container Utama (Gunakan class yang sama dengan slot-preview sebelumnya) */
+.slot-preview {
+    background-color: #f8fafc;
+    border: 1px dashed #cbd5e1;
+    border-radius: 8px;
+    padding: 12px 15px;
+    margin-bottom: 15px; /* Memberi jarak antar kotak preview */
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+/* Khusus warna untuk preview user agar sedikit berbeda (opsional) */
+.user-preview {
+    background-color: #f0f9ff; /* Biru sangat muda */
+    border-color: #bae6fd;
+}
+
+.slot-preview-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #64748b;
+    font-weight: 700;
+}
+
+.slot-detail-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #1e293b;
+    font-size: 0.95rem;
+}
+
+.slot-icon {
+    width: 20px;
+    text-align: center;
 }
